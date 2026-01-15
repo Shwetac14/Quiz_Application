@@ -1,20 +1,28 @@
-package com.spring.quiz_application.model;
+package com.spring.quizapp.model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-
-@Schema(description = "Quiz question model")
 public class QuizQuestion {
-    private int id;
+    private Integer id;  // must be Integer, not int
     private String question;
     private String optionA;
     private String optionB;
     private String optionC;
     private String optionD;
-    private String correctOption;  // Must match JSON field "correctOption"
+    private String correctOption;
 
-    public QuizQuestion() {}
+    public QuizQuestion() {} // No-arg constructor required by JdbcTemplate
 
-    public QuizQuestion(int id, String question, String optionA, String optionB, String optionC, String optionD, String correctOption) {
+    // Constructor without id (for inserting new questions)
+    public QuizQuestion(String question, String optionA, String optionB, String optionC, String optionD, String correctOption) {
+        this.question = question;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.correctOption = correctOption;
+    }
+
+    // Constructor with id (for fetching from DB)
+    public QuizQuestion(Integer id, String question, String optionA, String optionB, String optionC, String optionD, String correctOption) {
         this.id = id;
         this.question = question;
         this.optionA = optionA;
@@ -24,9 +32,9 @@ public class QuizQuestion {
         this.correctOption = correctOption;
     }
 
-    // Getters & Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    // Getters and Setters
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
     public String getQuestion() { return question; }
     public void setQuestion(String question) { this.question = question; }
